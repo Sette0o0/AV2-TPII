@@ -1,4 +1,7 @@
 import Processo from "../abstracoes/processo"
+import ContextoCliente from "../estrategias/contextoCliente"
+import EstrategiaEdicaoCliente from "../estrategias/estrategiaEdicaoCliente"
+import EstrategiaExclusaoCliente from "../estrategias/estrategiaExclusaoCliente"
 import MenuPrincipal from "../menus/menuPricipal"
 import TipoCadastroCliente from "./tipoCadastroCliente"
 import TipoListagemClientes from "./tipoListagemClientes"
@@ -17,9 +20,17 @@ export default class Principal extends Processo {
                 this.processo = new TipoCadastroCliente()
                 this.processo.processar()
                 break
+            case 2:
+                let contextoEdicao = new ContextoCliente(new EstrategiaEdicaoCliente())
+                contextoEdicao.executar()
+                break
             case 3:
                 this.processo = new TipoListagemClientes()
                 this.processo.processar()
+                break
+            case 4:
+                let contextoExclusao = new ContextoCliente(new EstrategiaExclusaoCliente())
+                contextoExclusao.executar()
                 break
             case 0:
                 this.execucao = false
